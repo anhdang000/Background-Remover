@@ -85,7 +85,8 @@ def inference(model, image, raw_image=None, postprocessor=None):
     logits = model(image)
     logits = F.interpolate(logits, size=(H, W), mode="bilinear", align_corners=False)
     probs = F.softmax(logits, dim=1)[0]
-    probs = probs.cpu().numpy()
+    # probs = probs.cpu().numpy()
+    probs = probs.detach().cpu().numpy()
 
     # Refine the prob map with CRF
     if postprocessor and raw_image is not None:
