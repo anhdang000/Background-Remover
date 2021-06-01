@@ -48,9 +48,18 @@ def predict(challenge: str = Form(...), input: UploadFile = File(...)):
         class_name = classes[label]
         if class_name in classes_of_interest:
             mask += mask_inclass
-
+    
+    # Create mask
     mask = np.where(mask >= 1, 1, mask)
+    mask = (mask * 255).astype(np.uint8)
+    if np.max(mask) == 0:
+        return {"warning": "Could not find any subjects in the image"}
+    else:
+        mask_3d = np.stack([mask]*3, axis=2)
 
-    _, im_png = cv2.imencode('.png', mask)
+    # Apply with source
+    output = np.where(mask_3d == 255, raw_image, 255)
 
-    return StreamingResponse(io.BytesIO(im_png.tobytes()), media_type="image/png")
+    _, output_png = cv2.imencode('.png', output)
+
+    return StreamingResponse(io.BytesIO(output_png.tobytes()), media_type="image/png")

@@ -19,7 +19,7 @@ CONFIG_PATH = 'configs/cocostuff164k.yaml'
 CRF = False
 CUDA = True
 
-INPUT_SIZE = 300
+INPUT_SIZE = 500
 IMAGE_SIZE_LIMIT = 10000000
 
 
