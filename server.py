@@ -58,7 +58,8 @@ def predict(challenge: str = Form(...), input: UploadFile = File(...)):
         mask_3d = np.stack([mask]*3, axis=2)
 
     # Apply with source
-    output = np.where(mask_3d == 255, raw_image, 255)
+    raw_rgb = raw_image[:, :, ::-1]
+    output = np.where(mask_3d == 255, raw_rgb, 255)
 
     _, output_png = cv2.imencode('.png', output)
 
