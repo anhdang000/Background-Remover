@@ -13,7 +13,6 @@ Source codes for DeepLab model are from the original repository: https://github.
 
 - Python >= 3.6
 - Pytorch > 1.2.0
-- Torchvision
 - FastAPI
 - Uvicorn
 
