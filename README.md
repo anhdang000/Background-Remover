@@ -35,7 +35,7 @@ wget https://github.com/kazuto1011/deeplab-pytorch/releases/download/v1.0/deepla
 ```
 Other options are also available on the original repository. Please refer to the [Pretrained Weights Comparison](https://github.com/kazuto1011/deeplab-pytorch#performance). Weights file's path as well as config file's path should be reconfigured as `MODEL_PATH` and `CONFIG_PATH` in `model_configs.py` corresponding to the downloaded weights.
 
-- Step 2: Required Python packages are listed in the Anaconda configuration file `configs/conda_env.yaml`. Please modify the listed `cudatoolkit=11.0` and `python=3.6` as needed and run the following commands.
+- Step 3: Required Python packages are listed in the Anaconda configuration file `configs/conda_env.yaml`. Please modify the listed `cudatoolkit=11.0` and `python=3.6` as needed and run the following commands.
 
 ```sh
 # Set up with Anaconda
@@ -43,10 +43,10 @@ conda env create -f configs/conda_env.yaml
 conda activate deeplab-pytorch
 ```
 
-- Step 3: Initialize the server.
+- Step 4: Initialize the server.
 
 ```sh
 uvicorn server:app --host 0.0.0.0 --reload
 ```
 
-- Step 4: The API is deployed on http://SERVER-IP:8000/challenge
+- Step 5: The API is deployed on http://SERVER-IP:8000/challenge
