@@ -25,6 +25,9 @@ Source codes for DeepLab model are from the original repository: https://github.
 # Clone the repo
 git clone https://gitlab.com/eyeq-training/anh-dang-training/anh-dang-first-week/
 cd anh-dang-first-week
+
+# Switch to Week 1 version
+git checkout w1
 ```
 
 - Step 2: Download the pretrained weights on COCO-Stuff 164k.
