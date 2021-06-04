@@ -1,7 +1,7 @@
 FROM continuumio/miniconda3:latest
 
-WORKDIR /home/background_remover_DeepLabV2
-ADD . /home/background_remover_DeepLabV2
+WORKDIR /bgrm_DeepLabV2
+ADD . /bgrm_DeepLabV2
  
 # Download pretrained weights on COCO
 RUN wget https://github.com/kazuto1011/deeplab-pytorch/releases/download/v1.0/deeplabv2_resnet101_msc-cocostuff164k-100000.pth
