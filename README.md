@@ -1,15 +1,26 @@
-# TRAINING - Deployment Instruction [Week 1]
+# TRAINING - Deployment Instruction
+
+# Table of contents
+1. [Week 1](#w1)
+    1. [Branches](#branches1)
+    2. [Dependencies](#dependencies1)
+    3. [Deploy instructions](#deploy1)
+2. [Week 2](#w2)
+3. [Week 3](#w3)
+
+#  1. Week 1: <a name="w1"></a>
 
 Author: Dang Linh Anh
 
 Update: 03/06/2021
 
 Source codes for DeepLab model are from the original repository: https://github.com/kazuto1011/deeplab-pytorch
-## Branches:
+
+## 1.1. Branches: <a name="branches1"></a>
 
 - Master
 
-## Dependencies:
+## 1.2. Dependencies: <a name="dependencies1"></a>
 
 - Python >= 3.6
 - Pytorch > 1.2.0
@@ -17,7 +28,7 @@ Source codes for DeepLab model are from the original repository: https://github.
 - Uvicorn
 
 
-## Deploy instructions: 
+## 1.3. Deploy instructions: <a name="deploy1"></a>
 
 - Step 1: Clone the repository.
 
@@ -52,3 +63,56 @@ uvicorn server:app --host 0.0.0.0 --reload
 ```
 
 - Step 5: The API is deployed on http://SERVER-IP:8000/challenge
+
+
+# 2. Week 2: <a name="w2"></a>
+
+## 2.1. Branches: <a name="branches2"></a>
+- Master
+- Develop
+
+## 2.2. Dependencies: <a name="dependencies1"></a>
+
+- Python >= 3.6
+- Pytorch > 1.2.0
+- FastAPI
+- Uvicorn
+- Pymongo >= 3
+
+# 2.3. Deploy Instruction: <a name="deploy2"></a>
+- Step 1: Clone the repository.
+
+```sh
+# Clone the repo
+git clone https://gitlab.com/eyeq-training/anh-dang-training/anh-dang-first-week/
+cd anh-dang-first-week
+
+# Switch to Week 2 version
+git checkout w2
+```
+
+- Step 2: Download the pretrained weights on COCO-Stuff 164k as refered in <b>Week 1</b>
+
+- Step 3: Download data to be stored in MongoDB Database
+
+```sh
+wget
+unzip images.zip -d data/database
+```
+
+- Step 4: Generate JSON format data of the database
+
+```sh
+python data/getJSONdata.py
+```
+This script will create an JSON output file (`init.json`) located in `mongodb` folder
+
+- Step 5: Run <b>Docker-compose</b> to create 2 docker container (named `fastapi` and `mongodb`)
+
+```sh
+docker-compose down && docker-compose build --no-cache && docker-compose up
+```
+
+- Step 6: The API for the computer vision challenge (regarded in <b>Week 1</b>) is deployed on http://SERVER-IP:8888/challenge
+
+- Step 7: To get stored data in MongoDB Database, give a check at http://SERVER-IP:8888/images
