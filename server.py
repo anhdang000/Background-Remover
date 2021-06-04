@@ -4,7 +4,8 @@ from fastapi import FastAPI
 from fastapi import UploadFile, File, Form
 from fastapi.responses import FileResponse
 from starlette.responses import StreamingResponse
-import uvicorn
+import pymongo
+from pymongo import MongoClient
 
 from model_configs import *
 from demo import inference
@@ -64,3 +65,28 @@ def predict(challenge: str = Form(...), input: UploadFile = File(...)):
     _, output_png = cv2.imencode('.png', output)
 
     return StreamingResponse(io.BytesIO(output_png.tobytes()), media_type="image/png")
+
+
+# Database
+def get_db():
+    client = MongoClient(host='test_mongodb',
+                         port=27017, 
+                         username='root', 
+                         password='pass',
+                        authSource="admin")
+    db = client["animal_db"]
+    return db
+
+@app.get('/images')
+def get_database():
+    db=""
+    try:
+        db = get_db()
+        _images = db.image_tb.find()
+        images = [{"id": image["id"], "path": image["path"], "width": image["width"], "height": image["height"]} for image in _images]
+        return {"images": images}
+    except:
+        pass
+    finally:
+        if type(db)==MongoClient:
+            db.close()

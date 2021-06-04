@@ -114,3 +114,6 @@ exps/
 *_v3plus.py
 *.json
 *.zip
+
+mongodb/db/
+data/database/
