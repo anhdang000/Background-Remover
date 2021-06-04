@@ -12,6 +12,10 @@ dependencies:
   - scipy
   - tqdm
   - pip:
+    - fastapi
+    - uvicorn
+    - python-multipart
+    - pymongo
     - addict
     - black
     - joblib
