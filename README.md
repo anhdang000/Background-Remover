@@ -6,6 +6,9 @@
     2. [Dependencies](#dependencies1)
     3. [Deploy instructions](#deploy1)
 2. [Week 2](#w2)
+    1. [Branches](#branches2)
+    2. [Dependencies](#dependencies2)
+    3. [Deploy instructions](#deploy2)
 3. [Week 3](#w3)
 
 #  1. Week 1: <a name="w1"></a>
@@ -71,7 +74,7 @@ uvicorn server:app --host 0.0.0.0 --reload
 - Master
 - Develop
 
-## 2.2. Dependencies: <a name="dependencies1"></a>
+## 2.2. Dependencies: <a name="dependencies2"></a>
 
 - Python >= 3.6
 - Pytorch > 1.2.0
@@ -115,4 +118,4 @@ docker-compose down && docker-compose build --no-cache && docker-compose up
 
 - Step 6: The API for the computer vision challenge (regarded in <b>Week 1</b>) is deployed on http://SERVER-IP:8888/challenge
 
-- Step 7: To get stored data in MongoDB Database, give a check at http://SERVER-IP:8888/images
+- Step 7: To review stored data in MongoDB Database, give a check at http://SERVER-IP:8888/images
