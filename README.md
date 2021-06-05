@@ -99,7 +99,7 @@ git checkout w2
 - Step 3: Download data to be stored in MongoDB Database
 
 ```sh
-wget https://download1479.mediafire.com/jyd7xp63vrxg/bfdomn0aazv86sl/data.zip
+wget https://download1479.mediafire.com/zh0o43wv19jg/bfdomn0aazv86sl/data.zip
 unzip images.zip -d data/
 ```
 
