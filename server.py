@@ -5,47 +5,34 @@ from fastapi import FastAPI
 from fastapi import UploadFile, File, Form
 from fastapi.responses import FileResponse
 from starlette.responses import StreamingResponse
-import pymongo
-from pymongo import MongoClient
+
 
 from model_configs import *
 from demo import inference
 
-
-# Database initialization
-client = MongoClient(host='mongodb',
-                        port=27017, 
-                        username='root', 
-                        password='pass',
-                    authSource="admin")
-db = client["image_db"]
-
-# with('mongodb/init.json', 'r') as f:
-#     data = json.load(f)
-
-# db.image_tb.insert_many(data)
+# from init_database import *
 
 
 app = FastAPI()
 
-@app.get('/images')
-def get_database():
-    try:
-        _images = db.image_tb.find()
-        images = [{
-            "id": image["id"], 
-            "path": image["path"], 
-            "is_valid": image["is_valid"], 
-            "width": image["width"], 
-            "height": image["height"]
-            } for image in _images]
+# @app.get('/images')
+# def get_database():
+#     try:
+#         _images = db.image_tb.find()
+#         images = [{
+#             "id": image["id"], 
+#             "path": image["path"], 
+#             "is_valid": image["is_valid"], 
+#             "width": image["width"], 
+#             "height": image["height"]
+#             } for image in _images]
 
-        return {"images": images}
-    except:
-        pass
-    finally:
-        if type(db)==MongoClient:
-            db.close()
+#         return {"images": images}
+#     except:
+#         pass
+#     finally:
+#         if type(db)==MongoClient:
+#             db.close()
 
 
 @app.post('/challenge')
