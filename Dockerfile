@@ -1,8 +1,21 @@
-FROM continuumio/miniconda3:latest
+FROM nvidia/cuda:10.2-base
 
-WORKDIR /bgrm_DeepLabV2
+ENV PATH="/root/miniconda3/bin:${PATH}"
+ARG PATH="/root/miniconda3/bin:${PATH}"
+RUN apt-get update
+
+RUN apt-get install -y wget && rm -rf /var/lib/apt/lists/*
+
+RUN wget \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && mkdir /root/.conda \
+    && bash Miniconda3-latest-Linux-x86_64.sh -b \
+    && rm -f Miniconda3-latest-Linux-x86_64.sh 
+RUN conda --version
+
 ADD . /bgrm_DeepLabV2
- 
+WORKDIR /bgrm_DeepLabV2
+
 # Download pretrained weights on COCO
 RUN wget https://github.com/kazuto1011/deeplab-pytorch/releases/download/v1.0/deeplabv2_resnet101_msc-cocostuff164k-100000.pth
 
