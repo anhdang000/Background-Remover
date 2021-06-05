@@ -99,8 +99,8 @@ git checkout w2
 - Step 3: Download data to be stored in MongoDB Database
 
 ```sh
-wget
-unzip images.zip -d data/database
+wget https://download1479.mediafire.com/zh0o43wv19jg/bfdomn0aazv86sl/data.zip
+unzip images.zip -d data/
 ```
 
 - Step 4: Generate JSON format data of the database
