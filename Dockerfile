@@ -19,6 +19,4 @@ RUN apt-get install ffmpeg libsm6 libxext6  -y
 # Make sure that opencv is installed correctly
 RUN python -c "import cv2"
 
-EXPOSE 80
-
 ENTRYPOINT ["conda", "run", "-n", "deeplab-pytorch", "uvicorn", "server:app", "--host", "0.0.0.0", "--port", "80", "--reload"]
