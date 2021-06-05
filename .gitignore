@@ -111,9 +111,11 @@ exps/
 *.gv
 .style.yapf
 ./*.json
+
 *_v3plus.py
-*.json
+# *.json
 *.zip
 
 mongodb/db/
+mongodb/mongodb/
 data/database/

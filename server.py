@@ -1,4 +1,5 @@
 import io
+import json
 from PIL import Image
 from fastapi import FastAPI
 from fastapi import UploadFile, File, Form
@@ -11,7 +12,41 @@ from model_configs import *
 from demo import inference
 
 
+# Database initialization
+client = MongoClient(host='mongodb',
+                        port=27017, 
+                        username='root', 
+                        password='pass',
+                    authSource="admin")
+db = client["image_db"]
+
+# with('mongodb/init.json', 'r') as f:
+#     data = json.load(f)
+
+# db.image_tb.insert_many(data)
+
+
 app = FastAPI()
+
+@app.get('/images')
+def get_database():
+    try:
+        _images = db.image_tb.find()
+        images = [{
+            "id": image["id"], 
+            "path": image["path"], 
+            "is_valid": image["is_valid"], 
+            "width": image["width"], 
+            "height": image["height"]
+            } for image in _images]
+
+        return {"images": images}
+    except:
+        pass
+    finally:
+        if type(db)==MongoClient:
+            db.close()
+
 
 @app.post('/challenge')
 def predict(challenge: str = Form(...), input: UploadFile = File(...)):
@@ -65,28 +100,3 @@ def predict(challenge: str = Form(...), input: UploadFile = File(...)):
     _, output_png = cv2.imencode('.png', output)
 
     return StreamingResponse(io.BytesIO(output_png.tobytes()), media_type="image/png")
-
-
-# Database
-def get_db():
-    client = MongoClient(host='test_mongodb',
-                         port=27017, 
-                         username='root', 
-                         password='pass',
-                        authSource="admin")
-    db = client["animal_db"]
-    return db
-
-@app.get('/images')
-def get_database():
-    db=""
-    try:
-        db = get_db()
-        _images = db.image_tb.find()
-        images = [{"id": image["id"], "path": image["path"], "width": image["width"], "height": image["height"]} for image in _images]
-        return {"images": images}
-    except:
-        pass
-    finally:
-        if type(db)==MongoClient:
-            db.close()

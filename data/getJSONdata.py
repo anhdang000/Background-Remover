@@ -5,9 +5,14 @@ import sys
 from tqdm import tqdm
 import cv2
 import numpy as np
+import argparse
 
-OUTPUT_FILE_PATH = 'data/init.json'
-DATA_DIR = 'data/database'
+parser = argparse.ArgumentParser()
+parser.add_argument('--data-dir', default='data/database', help='Directory containing data')
+FLAGS = parser.parse_args()
+
+OUTPUT_FILE_PATH = 'mongodb/init.json'
+DATA_DIR = FLAGS.data_dir
 
 IMG_IDS = os.listdir(DATA_DIR)
 IMG_IDS.sort()
