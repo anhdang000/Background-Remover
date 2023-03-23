@@ -1,5 +1,11 @@
 # Background Remover - Deployment Instruction
 
+Author: Dang Linh Anh
+
+Update: 03/06/2021
+
+Source codes for DeepLab model are from the original repository: https://github.com/kazuto1011/deeplab-pytorch
+
 # Table of contents
 1. [Branches](#branches2)
 2. [Dependencies](#dependencies2)
@@ -28,7 +34,12 @@ cd Background-Remover
 git checkout w2
 ```
 
-- Step 2: Download the pretrained weights on COCO-Stuff 164k as refered in <b>Week 1</b>
+- Step 2: Download the pretrained weights on COCO-Stuff 164k
+
+```sh
+wget https://github.com/kazuto1011/deeplab-pytorch/releases/download/v1.0/deeplabv2_resnet101_msc-cocostuff164k-100000.pth
+```
+Other options are also available on the original repository. Please refer to the [Pretrained Weights Comparison](https://github.com/kazuto1011/deeplab-pytorch#performance). Weights file's path as well as config file's path should be reconfigured as `MODEL_PATH` and `CONFIG_PATH` in `model_configs.py` corresponding to the downloaded weights.
 
 - Step 3: Download data to be stored in MongoDB Database
 
@@ -50,6 +61,6 @@ This script will create an JSON output file (`init.json`) located in `mongodb` f
 docker-compose down && docker-compose build --no-cache && docker-compose up
 ```
 
-- Step 6: The API for the computer vision challenge (regarded in <b>Week 1</b>) is deployed on http://SERVER-IP:8888/challenge
+- Step 6: The API is deployed on http://SERVER-IP:8888/challenge
 
-- Step 7: To review stored data in MongoDB Database, give a check at http://SERVER-IP:8888/images
+- Step 7: To review stored data in MongoDB Database, have a check at http://SERVER-IP:8888/images
